@@ -1,0 +1,35 @@
+@media screen and (min-width: 320px) and (max-width: 767px) {
+    .sign__form_input{
+        background-color: black;
+        width: 238px;
+        height: 14px;
+        padding: 0 0 13px;
+        border: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        margin: 0 22px 0px;
+        font-family: Inter;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 17px;
+        color: white;
+    }
+}
+
+@media screen and (min-width: 768px)  {
+    .sign__form_input{
+        background-color: black;
+        width: 358px;
+        height: 14px;
+        padding: 0 0 13px;
+        border: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        margin: 0 36px 0;
+        font-family: Inter;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 17px;
+        color: white;
+    }
+}

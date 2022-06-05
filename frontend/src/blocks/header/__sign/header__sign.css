@@ -1,0 +1,24 @@
+.header__sign{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: right;
+    color: #A9A9A9;
+    align-self: flex-end;
+    text-decoration: none;
+    margin: 6px 0 46px;
+}
+
+.header__sign:hover {
+    opacity: 0.6;
+}
+
+@media screen and (max-width: 767px){
+    .header__sign {
+        font-size: 14px;
+        line-height: 17px;
+        margin: 18px auto 40px;
+    }
+}

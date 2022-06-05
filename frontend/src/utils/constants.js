@@ -1,0 +1,1 @@
+export const baseUrl = 'https://api.mesto.firstproject.nomoredomains.xyz';

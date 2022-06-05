@@ -1,0 +1,23 @@
+.header__email{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: right;
+    color: #FFFFFF;
+    align-self: flex-end;
+    margin: 6px 24px 46px auto;
+}
+@media screen and (max-width: 767px){
+    .header__email{
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 22px;
+        text-align: right;
+        color: #FFFFFF;
+        align-self: flex-end;
+        margin: 0 auto 0;
+    }
+}

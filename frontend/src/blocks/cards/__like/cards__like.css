@@ -1,0 +1,8 @@
+.cards__like{
+    width: 22px;
+    height: 35px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    margin: -3px 5px 0 auto;
+}

@@ -1,0 +1,13 @@
+.sign__form_field{
+    position: relative;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 767px){
+    .sign__form_field{
+        margin-top: 20px;
+    }
+}
