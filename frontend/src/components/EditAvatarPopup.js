@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import PopupWithForm from '../components/PopupWithForm';
+import React,{useEffect}  from "react";
+import PopupWithForm from './PopupWithForm.js'
 
 function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
     const handleClose = () => onClose();
@@ -42,7 +42,8 @@ function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
                 </>
             }
         />
-    );
+    )
+
 }
 
 export default EditAvatarPopup;

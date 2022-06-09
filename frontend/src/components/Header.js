@@ -1,12 +1,9 @@
 import logo from '../images/logo.svg';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-function Header({
-                    text, link, email = '', handleLogin = () => {
-    }
-                }) {
-    function onSignOut() {
-        if (localStorage.getItem('token')) {
+function Header({text, link, email='', handleLogin=()=>{}}) {
+    function onSignOut(){
+        if (localStorage.getItem('token')){
             localStorage.removeItem('token');
             handleLogin(email, false);
         }

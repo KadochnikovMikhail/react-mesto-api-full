@@ -1,8 +1,6 @@
 import React from "react";
 
-
 function Login({onLogin, handleEmailChange, handlePasswordChange, email, password}){
-
 
     return (
         <div className='sign'>

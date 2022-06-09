@@ -7,18 +7,18 @@ function MainPage({onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, 
     return (
         <>
             <Header text='Выйти' link='/sign-in' email={email} handleLogin={handleLogin}/>
-            <Main
-                onEditProfile={onEditProfile}
-                onAddPlace={onAddPlace}
-                onEditAvatar={onEditAvatar}
-                onCardClick={onCardClick}
-                cards={cards}
-                onCardLike={onCardLike}
+            <Main 
+                onEditProfile={onEditProfile} 
+                onAddPlace={onAddPlace} 
+                onEditAvatar={onEditAvatar} 
+                onCardClick={onCardClick} 
+                cards={cards} 
+                onCardLike={onCardLike} 
                 onCardDelete={onCardDelete}
             />
             <Footer />
         </>
-
+        
     );
 }
 

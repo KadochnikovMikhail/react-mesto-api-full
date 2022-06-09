@@ -2,8 +2,6 @@ import {baseUrl} from "./constants";
 
 class Auth {
     constructor(baseUrl) {
-
-
         this._addressAuth = baseUrl;
     }
 
@@ -15,7 +13,7 @@ class Auth {
         return Promise.reject(`Ошибка: ${res.status}`)
     }
 
-    register(email, password) {
+    register(email, password){
         return fetch(`${this._addressAuth}/signup`, {
             method: 'POST',
             headers: {
@@ -29,7 +27,7 @@ class Auth {
             .then(this._handleResponse);
     };
 
-    login(email, password) {
+    login(email, password){
         return fetch(`${this._addressAuth}/signin`, {
             method: 'POST',
             headers: {
@@ -49,7 +47,7 @@ class Auth {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                'Authorization': `Bearer ${token}`,
             }
         })
             .then(res => res.json())
@@ -59,3 +57,4 @@ class Auth {
 
 const auth = new Auth(baseUrl)
 export default auth;
+

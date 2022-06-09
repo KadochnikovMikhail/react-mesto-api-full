@@ -42,4 +42,3 @@ function Card({card, onCardClick, onCardLike, onCardDelete}) {
 }
 
 export default Card
-

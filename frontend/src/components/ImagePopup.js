@@ -1,7 +1,6 @@
 import closeBtn from '../images/CloseIcon.svg';
 
-function ImagePopup({onClose, card}) {
-
+function ImagePopup({card, onClose}){
     return (
         <div className={card ? `popup popup_type_bigimage popup_opened` : `popup popup_image`} id="image_popup"
              onClick={onClose}>
@@ -19,5 +18,4 @@ function ImagePopup({onClose, card}) {
     );
 }
 
-export default ImagePopup
-
+export default ImagePopup;

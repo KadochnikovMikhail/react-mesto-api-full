@@ -1,7 +1,7 @@
 import React from "react";
 import closeBtn from "../images/CloseIcon.svg";
 
-function InfoTooltip({isOpen, onClose, caption, img}) {
+function InfoTooltip({isOpen, onClose, caption, img}){
     return (
         <div className={`popup ${isOpen && 'popup_opened'}`}>
             <div className="popup__container">
