@@ -1,9 +1,9 @@
 import React,{ useState, useEffect } from 'react';
 import Header from './Header.js'
 import MainPage from './MainPage.js'
+import PopupWithForm from './PopupWithForm.js'
 import ImagePopup from './ImagePopup.js'
 import api from '../utils/Api.js'
-import auth from '../utils/Auth';
 import {CurrentUserContext} from '../contexts/CurrentUserContext.js'
 import EditProfilePopup from './EditProfilePopup.js'
 import EditAvatarPopup from './EditAvatarPopup.js'
@@ -31,22 +31,10 @@ function App() {
   const [dataInfoTooltip, setDataInfoTooltip] = useState({ text: '', image: '' });
   const history = useHistory();
 
-  useEffect(() => {
-    const handleEscClose = (e) => {
-      if (e.key === "Escape") {
-        closeAllPopups();
-      }
-    };
-
-    document.addEventListener("keydown", handleEscClose);
-
-    return () => document.removeEventListener("keydown", handleEscClose);
-  }, []);
-
   function tokenCheck () {
     const jwt = localStorage.getItem('token');
     if (jwt){
-      auth.getContent(jwt)
+      api.getContent(jwt)
       .then((res) => {
         if (res){
           setEmail(res.user.email);
@@ -63,7 +51,7 @@ function App() {
   useEffect(() => {
     tokenCheck();
 
-    Promise.all([api.getUserInfo(), api.getInitialCards()])
+    Promise.all([api.getUser(), api.getInitialCards()])
     .then(([userData, cardsData])=>{
       setCurrentUser(userData.user);
       setCards(cardsData.cards);
@@ -99,7 +87,7 @@ function App() {
   }
 
   function handleUpdateUser(currentUser) {
-    api.editProfile(currentUser)
+    api.patchUserData(currentUser)
         .then((data)=>{
           setCurrentUser(data.user);
           closeAllPopups();
@@ -110,7 +98,7 @@ function App() {
   }
 
   function handleUpdateAvatar(currentUser) {
-    api.updateAvatar(currentUser.avatar)
+    api.patchAvatar(currentUser.avatar)
         .then((data)=>{
           setCurrentUser(data.user);
           closeAllPopups();
@@ -132,7 +120,7 @@ function App() {
   }
 
   function handleCardDelete(card) {
-      api.removeCard(card._id)
+      api.deleteCard(card._id)
       .then(() => {
           setCards(cards.filter(item => item._id !== card._id))
       })
@@ -141,8 +129,8 @@ function App() {
       });
   }
 
-  function handleAddPlaceSubmit(card) {
-    api.addCard(card)
+  function handleAddPlaceSubmit(cadr) {
+    api.postNewCard(cadr)
         .then((data)=>{
           setCards([data.card, ...cards]);
           closeAllPopups();
@@ -158,8 +146,8 @@ function App() {
   }
 
   function handleRegSubmit(email, password) {
-    auth.register(email, password)
-        .then(()=>{
+    api.register(email, password)
+        .then((data)=>{
           setInfoTooltipOpen(true);
           setDataInfoTooltip({ text: 'Вы успешно зарегистрировались', image: regDone });
           history.push('/sign-in');
@@ -176,98 +164,45 @@ function App() {
     setEmail(email);
   }
 
-  const [password, setPassword] = useState('');
-
-  function handleEmailChange(e) {
-    setEmail(e.target.value);
-  }
-
-  function handlePasswordChange(e) {
-    setPassword(e.target.value);
-  }
-
-  function onLogin(e) {
-    e.preventDefault();
-    if (!email || !password) {
-      return;
-    }
-    auth.login(email, password)
-        .then((data) => {
-          if (data.token) {
-            localStorage.setItem('token', data.token);
-            setEmail('');
-            setPassword('');
-            handleLogin(email, true);
-            history.push('/');
-          }
-        })
-        .catch((err) => {
-          authFall();
-          console.log(err);
-        });
-  }
-
   return (
-      <div className='root'>
-        <CurrentUserContext.Provider value={currentUser}>
-
-          <div className="page">
-            <div className="content">
-              <Switch>
-                <Route path="/sign-up">
-                  <Header text='Войти' link='/sign-in'/>
-                  <Register onRegSubmit={handleRegSubmit}/>
-                </Route>
-                <Route path="/sign-in">
-                  <Header text='Регистрация' link='/sign-up'/>
-                  <Login
-                      handleEmailChange={handleEmailChange} handlePasswordChange={handlePasswordChange}
-                      onLogin={onLogin} email={email} password={password}/>
-                </Route>
-                <ProtectedRoute
-                    path="/"
-                    loggedIn={loggedIn}
-                    onEditProfile={handleEditProfileClick}
-                    onAddPlace={handleAddPlaceClick}
-                    onEditAvatar={handleEditAvatarClick}
-                    onCardClick={handleCardClick}
-                    cards={cards}
-                    onCardLike={handleCardLike}
-                    onCardDelete={handleCardDelete}
-                    email={email}
-                    handleLogin={handleLogin}
-                    component={MainPage}
-                />
-              </Switch>
-            </div>
-
-            <EditProfilePopup
-                isOpen={isEditProfilePopupOpen}
-                onClose={closeAllPopups}
-                onUpdateUser={handleUpdateUser}
-            />
-            <EditAvatarPopup
-                isOpen={isEditAvatarPopupOpen}
-                onClose={closeAllPopups}
-                onUpdateAvatar={handleUpdateAvatar}
-            />
-
-            <AddPlacePopup
-                isOpen={isAddPlacePopupOpen}
-                onClose={closeAllPopups}
-                onAddPlace={handleAddPlaceSubmit}
-            />
-
-            <ImagePopup
-                card={selectedCard}
-                onClose={closeAllPopups}
-            />
-            <InfoTooltip isOpen={isInfoTooltipOpen} onClose={closeAllPopups} caption={dataInfoTooltip.text}
-                         img={dataInfoTooltip.image}/>
-          </div>
-
-        </CurrentUserContext.Provider>
-      </div>
+    <div className='root'>
+      <CurrentUserContext.Provider value={currentUser}>
+        <Switch>
+          <Route path="/sign-up">
+            <Header text='Войти' link='/sign-in'/>
+            <Register onRegSubmit={handleRegSubmit}/>
+          </Route>
+          <Route path="/sign-in">
+            <Header text='Регистрация' link='/sign-up'/>
+            <Login handleLogin={handleLogin} authFall={authFall}/>
+          </Route>
+          <ProtectedRoute 
+              path="/" 
+              loggedIn={loggedIn}
+              onEditProfile={handleEditProfileClick} 
+              onAddPlace={handleAddPlaceClick} 
+              onEditAvatar={handleEditAvatarClick} 
+              onCardClick={handleCardClick}
+              cards={cards} 
+              onCardLike={handleCardLike} 
+              onCardDelete={handleCardDelete} 
+              email={email}
+              handleLogin={handleLogin}
+              component={MainPage}
+          />
+        </Switch>
+        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
+        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} buttonText='Создать' onAddPlace={handleAddPlaceSubmit}/>
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/>
+        <PopupWithForm name='delete-place' title='Вы уверены?'>
+          <button className="popup__close-button" type="button" aria-label="Close"></button>
+          <h2 className="popup__title">Вы уверены?</h2>
+          <button className="popup__button" type="submit">Да</button>
+        </PopupWithForm>
+        <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
+        <InfoTooltip isOpen={isInfoTooltipOpen} onClose={closeAllPopups} caption={dataInfoTooltip.text} img={dataInfoTooltip.image}/>
+      </CurrentUserContext.Provider>
+    </div>
   );
 }
 

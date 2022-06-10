@@ -1,9 +1,9 @@
 .header__logo {
     display: block;
+    background-image: url(../../../images/Vector.svg);
     background-size: cover;
     width: 145px;
     height: 33px;
-    margin: 27px auto 32px 30px;
 }
 
 .header__logo:hover {

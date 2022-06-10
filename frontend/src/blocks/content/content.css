@@ -1,20 +1,22 @@
-@media screen and (min-width: 320px) and (max-width: 767px) {
-    .content{
-        width: 320px;
-        margin: 45px auto 60px; 
-    }
+.content{
+  max-width: 880px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 100%;
+  flex: 1;
+  box-sizing: border-box;
 }
 
-@media screen and (min-width: 768px) and (max-width: 1023px) {
-    .content{
-        width: 581px;
-        margin: 45px auto 60px; 
-    }
+@media screen and (max-width: 1023px){
+  .content {
+      padding-left: 40px;
+      padding-right: 40px;
+  }
 }
 
-@media screen and (min-width: 1024px){
-    .content{
-      width: 880px;
-      margin: 45px auto 60px; 
-    }
+@media screen and (max-width: 767px){
+  .content {
+      padding: 0;
+  }
 }

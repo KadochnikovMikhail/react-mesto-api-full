@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a8ab2b5e-615a-425e-a9b4-90de99507709" name="Changes" comment="" />
+    <list default="true" id="a8ab2b5e-615a-425e-a9b4-90de99507709" name="Changes" comment="crash test">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,10 +39,49 @@
       <option name="presentableId" value="Default" />
       <updated>1654446759073</updated>
       <workItem from="1654446761605" duration="1114000" />
+      <workItem from="1654771726593" duration="1104000" />
     </task>
+    <task id="LOCAL-00001" summary="fix error">
+      <created>1654771791044</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1654771791044</updated>
+    </task>
+    <task id="LOCAL-00002" summary="fix error">
+      <created>1654772031317</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1654772031317</updated>
+    </task>
+    <task id="LOCAL-00003" summary="crash test">
+      <created>1654772059776</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1654772059776</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fix error" />
+    <MESSAGE value="crash test" />
+    <option name="LAST_COMMIT_MESSAGE" value="crash test" />
   </component>
 </project>

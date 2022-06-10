@@ -1,28 +1,19 @@
-import closeBtn from '../images/CloseIcon.svg';
+import React from "react";
 
-
-function PopupWithForm({title, name, children, isOpen,onSubmit, onClose}) {
-
+function PopupWithForm(props){
+  const {name, title, isOpen, onClose, buttonText='Сохранить', onSubmit} = props;
   return (
-      <div className={isOpen ? `popup ${name} popup_opened` : `popup ${name}`} >
-        <div className="popup__overlay" id="overlay" onClick={onClose}></div>
-        <div className="popup__container">
-          <button className="popup__closebutton" id="profile-close" type="button" onClick={onClose}>
-            <img className="popup__closebutton-image" alt="закрыть" src={closeBtn}/>
-          </button>
-          <form className="form"  name={name} onSubmit={onSubmit}>
-            <div className="form__header">
-              <h2 className="form__title">{title}</h2>
-            </div>
-            {children}
-
-            <button className="form__buttonsave form__buttonsave_type_save"
-                    type="submit">Сохранить
-            </button>
-          </form>
-        </div>
+    <div className={`popup popup_type_${name} ${isOpen && 'popup_opened'}`}>
+      <div className="popup__container">
+        <button className="popup__close-button" onClick={onClose} type="button" aria-label="Close"></button>
+        <h2 className="popup__title">{title}</h2>
+        <form className="popup__form" name={`${name}`}>
+          {props.children}
+          <button className="popup__button" onClick={onSubmit} type="submit">{buttonText}</button>
+        </form>
       </div>
+    </div>
   )
 }
 
-export default PopupWithForm
+export default PopupWithForm;

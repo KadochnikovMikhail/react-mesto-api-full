@@ -1,7 +1,4 @@
-.popup_opened{
-    display: flex;
+.popup_opened {
     visibility: visible;
     opacity: 1;
-    transition: visibility 0s, opacity 0.5s;
-    transition-delay: 0s;
 }

@@ -1,6 +1,5 @@
 import React from 'react';
-import editBtn from '../images/editbutton.svg';
-import addBtn from '../images/addbutton.svg';
+import EditIcoPath from '../images/EditIco.svg';
 import Card from './Card.js'
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
@@ -8,34 +7,28 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, onCa
 
     const currentUser = React.useContext(CurrentUserContext);
     return (
-        <main className="main">
+       <main className="content">
             <section className="profile">
-                <div className="profile__avatar-container">
-                    <img className="profile__image" alt="Фото профиля" src={currentUser.avatar}/>
-                    <div className="profile__overlay" onClick={onEditAvatar}></div>
-                </div>
-
-                <div className="profile__info">
-                    <div className="profile__header">
-                        <h1 className="profile__name">{currentUser.name}</h1>
-                        <button className="profile__edit-button" type="button">
-                            <img className="profile__edit-button-image" alt="Редактировать"
-                                 src={editBtn} onClick={onEditProfile}/>
-                        </button>
+                <div className="profile__current">
+                    <img alt="Аватар" className="profile__avatar" src={`${currentUser.avatar}`}/>
+                    <div className="profile__avatar-edit" onClick={onEditAvatar}>
+                        <img src={EditIcoPath} alt="Иконка" className="profile__avatar-edit-ico"/>
                     </div>
-
-                    <h2 className="profile__description">{currentUser.about}</h2>
+                    <div className="profile__info">
+                        <div className="profile__info-name">
+                            <h1 className="profile__info-name-current">{currentUser.name}</h1>
+                            <button className="profile__info-edit-button" onClick={onEditProfile} type="button" aria-label="Edit"></button>
+                        </div>
+                        <p className="profile__info-description">{currentUser.about}</p>
+                    </div>
                 </div>
-                <button className="profile__addbutton" type="button" onClick={onAddPlace}><img
-                    className="profile__addbutton-image" alt="Добавить"
-                    src={addBtn}/></button>
-
+                <button className="profile__add-button" type="button" onClick={onAddPlace} aria-label="Add"></button>
             </section>
-            <section className="cards">
+            <section className="elements">
                 {cards.map((item) => (
-
-                        <Card card={item} onCardClick={onCardClick} onCardLike={onCardLike} onCardDelete={onCardDelete} key={item._id}/>
-
+                    <div className="element" key={item._id}>
+                        <Card card={item} onCardClick={onCardClick} onCardLike={onCardLike} onCardDelete={onCardDelete}/>
+                    </div>
                 ))}
             </section>
         </main>
